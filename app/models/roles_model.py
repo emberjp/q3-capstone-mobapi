@@ -1,0 +1,21 @@
+from dataclasses import dataclass
+
+from app.configs.database import db
+from app.models import champions_roles
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
+
+
+@dataclass
+class Role(db.Model):
+    id: int
+    name: str
+
+    __tablename__ = "roles"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+
+    champions = relationship(
+        "Champion", secondary=champions_roles, backpopulates="roles"
+    )
