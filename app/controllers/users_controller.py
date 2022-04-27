@@ -12,9 +12,9 @@ def get_users():
     ...
 
 
-def edit_users(id):
+def edit_user(id):
     ...
 
 
-def delete_users(id):
+def delete_user(id):
     ...
