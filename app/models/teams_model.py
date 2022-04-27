@@ -14,6 +14,7 @@ class Team(db.Model):
     __tablename__ = "teams"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False, unique=True)
+    name = Column(String(25), nullable=False, unique=True)
 
     users = relationship("User", secondary=TeamUser, backpopulates="teams")
+    game = relationship("Game", backpopulates="teams", uselist=False)

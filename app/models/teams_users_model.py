@@ -11,7 +11,7 @@ class TeamUser(db.Model):
 
     __tablename__ = "teams_users"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer(20), primary_key=True)
     function = Column(String)
 
     team_id = Column(Integer, ForeignKey("teams.id"), nullable=False)

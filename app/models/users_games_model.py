@@ -13,8 +13,8 @@ class UserGame(db.Model):
     __tablename__ = "users_games"
 
     id = Column(Integer, primary_key=True)
-    nickname = Column(String)
-    rank = Column(String)
+    nickname = Column(String(20), nullable=False)
+    rank = Column(String(16))
 
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     game_id = Column(Integer, ForeignKey("games.id"), nullable=False)

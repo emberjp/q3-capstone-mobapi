@@ -14,7 +14,7 @@ class Role(db.Model):
     __tablename__ = "roles"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
+    name = Column(String(16))
 
     champions = relationship(
         "Champion", secondary=champions_roles, backpopulates="roles"

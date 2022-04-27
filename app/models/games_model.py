@@ -15,8 +15,10 @@ class Game(db.Model):
     __tablename__ = "games"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    url_name = Column(String)
+    name = Column(String(50), nullable=False, unique=True)
+    url_name = Column(String(10), nullable=False, unique=True)
 
     champions = relationship("Champion", backpopulates="game")
     users = relationship("User", secondary=UserGame, backpopulates="games")
+    teams = relationship("Team", backpopulates="game")
+    positions = relationship("Position", backpopulates="game")

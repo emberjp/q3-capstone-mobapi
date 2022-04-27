@@ -14,6 +14,7 @@ class Position(db.Model):
     __tablename__ = "positions"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
+    name = Column(String(20, nullable=False))
 
     users = relationship("User", secondary=users_positions, backpopulates="positions")
+    game = relationship("Game", backpopulates="positions", uselist=False)
