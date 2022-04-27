@@ -4,17 +4,17 @@ from sqlalchemy.orm import Query
 from sqlalchemy.orm.session import Session
 
 
-def add_user():
+def add_role():
     ...
 
 
-def get_users():
+def get_roles():
     ...
 
 
-def edit_users(id):
+def edit_role(id):
     ...
 
 
-def delete_users(id):
+def delete_role(id):
     ...
