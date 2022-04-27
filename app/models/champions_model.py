@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 
 from app.configs.database import db
-from app.models import champions_roles, users_champions
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
@@ -22,6 +21,10 @@ class Champion(db.Model):
 
     game_id = Column(Integer, ForeignKey("games.id"))
 
-    roles = relationship("Role", secondary=champions_roles, backpopulates="champions")
-    users = relationship("User", secondary=users_champions, backpopulates="champions")
-    game = relationship("Game", backpopulates="champions", uselist=False)
+    roles = relationship(
+        "Role", secondary="champions_roles", back_populates="champions"
+    )
+    users = relationship(
+        "User", secondary="users_champions", back_populates="champions"
+    )
+    game = relationship("Game", back_populates="champions", uselist=False)

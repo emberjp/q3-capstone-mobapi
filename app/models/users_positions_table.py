@@ -1,8 +1,8 @@
-from sqlalchemy import Column, ForeignKey, Integer, Table
+from app.configs.database import db
 
-users_positions = Table(
+users_positions = db.Table(
     "users_positions",
-    Column("id", Integer, primary_key=True),
-    Column("user_id", Integer, ForeignKey("users.id")),
-    Column("position_id", Integer, ForeignKey("positions.id")),
+    db.Column("id", db.Integer, primary_key=True),
+    db.Column("user_id", db.Integer, db.ForeignKey("users.id")),
+    db.Column("position_id", db.Integer, db.ForeignKey("positions.id")),
 )

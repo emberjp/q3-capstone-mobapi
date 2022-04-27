@@ -1,8 +1,8 @@
-from sqlalchemy import Column, ForeignKey, Integer, Table
+from app.configs.database import db
 
-users_champions = Table(
+users_champions = db.Table(
     "users_champions",
-    Column("id", Integer, primary_key=True),
-    Column("user_id", Integer, ForeignKey("users.id")),
-    Column("champion_id", Integer, ForeignKey("champions.id")),
+    db.Column("id", db.Integer, primary_key=True),
+    db.Column("user_id", db.Integer, db.ForeignKey("users.id")),
+    db.Column("champion_id", db.Integer, db.ForeignKey("champions.id")),
 )
