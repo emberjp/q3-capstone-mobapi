@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from app.configs.database import db
-from app.models import TeamUser, UserGame, users_champions, users_positions
+from app.models import TeamUser, UserGame
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 
@@ -23,12 +23,12 @@ class User(db.Model):
     password = Column(String, nullable=False)
 
     positions = relationship(
-        "Position", secondary=users_positions, backpopulates="users"
+        "Position", secondary="users_positions", back_populates="users"
     )
 
     champions = relationship(
-        "Champion", secondary=users_champions, backpopulates="users"
+        "Champion", secondary="users_champions", back_populates="users"
     )
 
-    games = relationship("Game", secondary=UserGame, backpopulates="users")
-    teams = relationship("Team", secondary=TeamUser, backpopulates="users")
+    games = relationship("Game", secondary=UserGame, back_populates="users")
+    teams = relationship("Team", secondary=TeamUser, back_populates="users")

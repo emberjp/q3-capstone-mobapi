@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from app.configs.database import db
-from app.models import champions_roles
+
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 
@@ -17,5 +17,5 @@ class Role(db.Model):
     name = Column(String(16))
 
     champions = relationship(
-        "Champion", secondary=champions_roles, backpopulates="roles"
+        "Champion", secondary="champions_roles", back_populates="roles"
     )
