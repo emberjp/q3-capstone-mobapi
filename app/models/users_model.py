@@ -10,13 +10,15 @@ from sqlalchemy.orm import relationship
 class User(db.Model):
     id: int
     name: str
+    email: str
     bio: str
     password: str
 
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False, unique=True)
+    name = Column(String(20), nullable=False)
+    email = Column(String(50), nullable=False, unique=True)
     bio = Column(String)
     password = Column(String, nullable=False)
 
