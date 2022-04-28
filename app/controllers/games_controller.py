@@ -12,8 +12,10 @@ def add_game():
 
 def get_games():
     base_query: Query = db.session.query(Game)
-    print(f"{base_query=}")
     games = base_query.order_by(Game.id).all()
+
+    if not games:
+        return {"err": "Nothing to list"}, 404
 
     return jsonify(games), 200
 
