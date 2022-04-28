@@ -18,7 +18,6 @@ class Champion(db.Model):
     name = Column(String(16), nullable=False)
     img_url = Column(String, nullable=False)
     info = Column(String, nullable=False)
-
     game_id = Column(Integer, ForeignKey("games.id"))
 
     roles = relationship(
