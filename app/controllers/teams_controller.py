@@ -1,3 +1,4 @@
+from http import HTTPStatus
 from flask import jsonify
 from app.configs.database import db
 from app.models import Team
@@ -18,8 +19,13 @@ def get_teams():
 
 
 def get_team(id):
-    ...
-
+    base_query: Query = db.session.query(Team)
+    team = base_query.filter(Team.id == id).first()
+    
+    if team:
+        return jsonify(team), HTTPStatus.OK
+    
+    return {"err": f"team {id} does not exist"}, HTTPStatus.NOT_FOUND
 
 def edit_team(id):
     ...
