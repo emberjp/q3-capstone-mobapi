@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 
 from app.configs.database import db
-from sqlalchemy import Column, Integer, String, ForeignKey
+
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 
@@ -14,5 +15,8 @@ class Team(db.Model):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(25), nullable=False, unique=True)
+
     game_id = Column(Integer, ForeignKey("games.id"))
-    users = relationship("User", secondary="TeamUser", back_populates="teams")
+
+    users = relationship("User", secondary="teams_users", back_populates="teams")
+    game = relationship("Game", back_populates="teams", uselist=False)
