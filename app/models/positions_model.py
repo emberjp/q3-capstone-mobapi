@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from app.configs.database import db
 from sqlalchemy import Column, ForeignKey, Integer, String
+
 from sqlalchemy.orm import relationship
 
 
@@ -21,3 +22,5 @@ class Position(db.Model):
         "User", secondary="users_positions", back_populates="positions"
     )
     game = relationship("Game", back_populates="positions", uselist=False)
+
+ 
