@@ -12,10 +12,8 @@ def add_position():
 
 def get_positions():
     base_query: Query = db.session.query(Position)
-    print(f"{base_query=}")
     positions = base_query.order_by(Position.id).all()
 
-    
     return jsonify(positions), 200
 
 def edit_position(id):
