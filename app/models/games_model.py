@@ -18,6 +18,6 @@ class Game(db.Model):
     url_name = Column(String(10), nullable=False, unique=True)
 
     champions = relationship("Champion", back_populates="game")
-    users = relationship("User", secondary="UserGame", back_populates="games")
+    users = relationship("User", secondary="users_games", back_populates="game")
     teams = relationship("Team", back_populates="game")
     positions = relationship("Position", back_populates="game")

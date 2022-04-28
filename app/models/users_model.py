@@ -30,5 +30,5 @@ class User(db.Model):
         "Champion", secondary="users_champions", back_populates="users"
     )
 
-    games = relationship("Game", secondary=UserGame, back_populates="users")
-    teams = relationship("Team", secondary=TeamUser, back_populates="users")
+    game = relationship("Game", secondary="users_games", back_populates="users")
+    teams = relationship("Team", secondary="teams_users", back_populates="users")
