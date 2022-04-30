@@ -1,5 +1,5 @@
 from flask import jsonify
-from app.models import Position
+from app.models import Position, Game
 from app.configs.database import db
 from sqlalchemy import exc
 from sqlalchemy.orm import Query
@@ -10,11 +10,22 @@ def add_position():
     ...
 
 
-def get_positions():
-    base_query: Query = db.session.query(Position)
-    positions = base_query.order_by(Position.id).all()
+def get_positions(game):
+    query_game: Query = db.session.query(Game)
+    query_position: Query = db.session.query(Position)
 
-    return jsonify(positions), 200
+    game_query = query_game.filter_by(url_name=game.lower()).first()
+
+    if not game_query:
+        return {"err": f"Game {game} not found"}, 404
+
+    position_query = query_position.order_by(Position.id).all()
+
+    if not position_query:
+        return {"err": "Nothing to list"}, 404
+
+    return jsonify(position_query), 200
+
 
 def edit_position(id):
     ...
