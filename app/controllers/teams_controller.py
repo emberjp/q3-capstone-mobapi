@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from flask import jsonify
+from flask import jsonify, request
 from app.configs.database import db
 from app.models import Team, Game
 from sqlalchemy import exc
@@ -8,7 +8,17 @@ from sqlalchemy.orm.session import Session
 
 
 def add_team():
-    ...
+    try:
+        team_data = request.get_json()
+        new_team = Team(**team_data)
+        db.session.add(new_team)
+        db.session.commit()
+        return jsonify(new_team), HTTPStatus.CREATED
+    except exc.IntegrityError:
+        return {
+            "error": 409,
+            "message": "There is already a team with this name",
+        }, HTTPStatus.CONFLICT
 
 
 def get_teams(game):
