@@ -13,7 +13,6 @@ def add_game():
 def get_games():
     query_game: Query = db.session.query(Game)
     game_query = query_game.order_by(Game.id).all()
-
     if not game_query:
         return {"err": "Nothing to list"}, 404
 

@@ -6,7 +6,7 @@ from sqlalchemy.orm import Query
 from sqlalchemy.orm.session import Session
 
 
-def add_champion():
+def add_champion(game):
     ...
 
 

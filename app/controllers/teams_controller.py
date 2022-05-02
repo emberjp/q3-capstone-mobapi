@@ -7,7 +7,7 @@ from sqlalchemy.orm import Query
 from sqlalchemy.orm.session import Session
 
 
-def add_team():
+def add_team(game):
     try:
         team_data = request.get_json()
         new_team = Team(**team_data)
