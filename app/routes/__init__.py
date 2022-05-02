@@ -11,6 +11,14 @@ bp_api = Blueprint("api", __name__, url_prefix="")
 
 
 def init_app(app: Flask):
+    @app.errorhandler(404)
+    def invalid_route(e):
+        return {"err": "Route not found"}, 404
+
+    @app.errorhandler(405)
+    def invalid_route(e):
+        return {"err": "Route not found"}, 404
+
     bp_api.register_blueprint(bp_champions)
     bp_api.register_blueprint(bp_games)
     bp_api.register_blueprint(bp_positions)
