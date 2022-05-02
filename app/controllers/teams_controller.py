@@ -55,16 +55,6 @@ def get_team(game, id):
     return jsonify(team_query), 200
 
 
-def get_team(id):
-    base_query: Query = db.session.query(Team)
-    team = base_query.filter(Team.id == id).first()
-
-    if team:
-        return jsonify(team), HTTPStatus.OK
-
-    return {"err": f"team {id} does not exist"}, HTTPStatus.NOT_FOUND
-
-
 def edit_team(id):
     ...
 
