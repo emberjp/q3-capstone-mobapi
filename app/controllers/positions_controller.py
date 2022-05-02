@@ -1,13 +1,18 @@
-from flask import jsonify
+from flask import jsonify, request
 from app.models import Position, Game
 from app.configs.database import db
 from sqlalchemy import exc
 from sqlalchemy.orm import Query
 from sqlalchemy.orm.session import Session
+from http import HTTPStatus
 
 
 def add_position():
-    ...
+    game_data = request.get_json()
+    new_game = Position(**game_data)
+    db.session.add(new_game)
+    db.session.commit()
+    return jsonify(new_game), HTTPStatus.CREATED
 
 
 def get_positions(game):
