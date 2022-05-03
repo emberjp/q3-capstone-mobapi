@@ -1,6 +1,7 @@
+from http import HTTPStatus
 from app.configs.database import db
 from app.models import Champion, Game
-from flask import jsonify
+from flask import jsonify, request
 from sqlalchemy import exc
 from sqlalchemy.orm import Query
 from sqlalchemy.orm.session import Session
@@ -27,8 +28,33 @@ def get_champions(game):
     return jsonify(champion_query), 200
 
 
-def edit_champion(id):
-    ...
+def edit_champion(game, id):
+    session: Session = db.session
+
+    data = request.get_json()
+
+    query_champion = session.query(Champion).get(id)
+    query_game = session.query(Game)
+
+    game_query = query_game.filter_by(url_name=game.lower()).first()
+
+    if not game_query:
+        return {"err": f"Game {game} not found"}, HTTPStatus.NOT_FOUND
+    
+
+    if query_champion:
+        for key, value in data.items():
+        
+            setattr(query_champion, key, value)
+        
+        session.commit()
+        
+        return jsonify(query_champion), HTTPStatus.OK
+
+    else:
+        
+        return {'err': f"{id} doesn't exist"}, HTTPStatus.NOT_FOUND
+    
 
 
 def delete_champion(id):
