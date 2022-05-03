@@ -34,7 +34,7 @@ def edit_champion(game, id):
     data = request.get_json()
 
     query_game = session.query(Game)
-    query_champion = session.query(Champion).get(id)
+    query_champion = session.query(Champion)
 
     game_query = query_game.filter_by(url_name=game.lower()).first()
 
