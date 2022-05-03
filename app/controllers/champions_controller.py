@@ -1,13 +1,20 @@
 from app.configs.database import db
 from app.models import Champion, Game
-from flask import jsonify
+from flask import jsonify, request
 from sqlalchemy import exc
 from sqlalchemy.orm import Query
 from sqlalchemy.orm.session import Session
+from http import HTTPStatus
 
 
 def add_champion(game):
-    ...
+    champion_data = request.get_json()
+    new_champion = Champion(**champion_data)
+    champion_game = db.session.query(Game).filter_by(url_name=game.lower()).first()
+    new_champion.game = champion_game
+    db.session.add(new_champion)
+    db.session.commit()
+    return jsonify(new_champion), HTTPStatus.CREATED
 
 
 def get_champions(game):

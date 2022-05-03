@@ -11,10 +11,12 @@ def add_team(game):
     try:
         team_data = request.get_json()
         new_team = Team(**team_data)
+        team_game = db.session.query(Game).filter_by(url_name=game.lower()).first()
+        new_team.game = team_game
         db.session.add(new_team)
         db.session.commit()
         return jsonify(new_team), HTTPStatus.CREATED
-    except exc.IntegrityError:
+    except AttributeError:
         return {
             "error": 409,
             "message": "There is already a team with this name",

@@ -10,7 +10,7 @@ from sqlalchemy.orm import relationship
 class Team(db.Model):
     id: int
     name: str
-
+    game: dict
     __tablename__ = "teams"
 
     id = Column(Integer, primary_key=True)

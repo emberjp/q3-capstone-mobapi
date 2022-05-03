@@ -7,12 +7,14 @@ from sqlalchemy.orm.session import Session
 from http import HTTPStatus
 
 
-def add_position():
-    game_data = request.get_json()
-    new_game = Position(**game_data)
-    db.session.add(new_game)
+def add_position(game):
+    position_data = request.get_json()
+    new_position = Position(**position_data)
+    position_game = db.session.query(Game).filter_by(url_name=game.lower()).first()
+    new_position.game = position_game
+    db.session.add(new_position)
     db.session.commit()
-    return jsonify(new_game), HTTPStatus.CREATED
+    return jsonify(new_position), HTTPStatus.CREATED
 
 
 def get_positions(game):

@@ -7,7 +7,7 @@ from sqlalchemy.orm.session import Session
 from app.models import Game, User
 
 
-def add_user():
+def add_user(game):
     ...
 
 
