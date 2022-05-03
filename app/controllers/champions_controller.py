@@ -33,23 +33,24 @@ def edit_champion(game, id):
 
     data = request.get_json()
 
-    query_champion = session.query(Champion).get(id)
     query_game = session.query(Game)
+    query_champion = session.query(Champion).get(id)
 
     game_query = query_game.filter_by(url_name=game.lower()).first()
 
     if not game_query:
         return {"err": f"Game {game} not found"}, HTTPStatus.NOT_FOUND
     
+    champion_query = query_champion.filter_by(id=id).first()
 
-    if query_champion:
+    if champion_query:
         for key, value in data.items():
         
-            setattr(query_champion, key, value)
+            setattr(champion_query, key, value)
         
         session.commit()
         
-        return jsonify(query_champion), HTTPStatus.OK
+        return jsonify(champion_query), HTTPStatus.OK
 
     else:
         
