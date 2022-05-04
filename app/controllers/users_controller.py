@@ -62,5 +62,24 @@ def edit_user(game, id):
         return {'err': f"Id {id} doesn't exist"}, HTTPStatus.NOT_FOUND
 
 
-def delete_user(id):
-    ...
+def delete_user(game, id):
+    session: Session = db.session()
+
+    query_game = session.query(Game)
+    query_user = session.query(User)
+
+    game_query = query_game.filter_by(url_name=game.lower()).first()
+
+    if not game_query:
+        return {"err": f"Game {game} not found"}, HTTPStatus.NOT_FOUND
+    
+    user_query = query_user.filter_by(id=id).first()
+
+    if user_query:
+        session.delete(user_query)
+
+        session.commit()    
+
+        return "", HTTPStatus.NO_CONTENT
+    else:
+        return {'error': f" Id {id} doesn't exists"}, HTTPStatus.NOT_FOUND
