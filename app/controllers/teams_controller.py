@@ -57,9 +57,30 @@ def get_team(game, id):
     return jsonify(team_query), 200
 
 
-def edit_team(id):
-    ...
+def data_to_edit(query, data):
+    for key, value in data.items():
+        setattr(query, key, value)
+    
+    return query
 
 
-def delete_team(id):
-    ...
+def edit_team(game, id):
+    query_game: Query = db.session.query(Game)
+    query_team: Query = db.session.query(Team)
+    game_query = query_game.filter_by(url_name=game.lower()).first()
+    data = request.get_json()
+
+    if not game_query:
+        return {"err": f"Game {game} not found"}, 404
+
+    team_query = query_team.filter_by(id=id).first()
+    data_to_edit(team_query, data)
+
+    if not team_query:
+        return {"err": "Nothing to edit"}, 404
+
+    return jsonify(team_query), 200
+
+
+def delete_team(game,id):
+   ...
