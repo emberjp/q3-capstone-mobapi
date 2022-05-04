@@ -1,14 +1,19 @@
-from flask import jsonify
+from flask import jsonify, request
 from app.configs.database import db
 from sqlalchemy import exc
 from sqlalchemy.orm import Query
 from sqlalchemy.orm.session import Session
+from http import HTTPStatus
 
 from app.models import Game, User
 
 
-def add_user():
-    ...
+def add_user(game):
+    user_data = request.get_json()
+    new_user = User(**user_data)
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify(new_user), HTTPStatus.CREATED
 
 
 def get_users(game):
