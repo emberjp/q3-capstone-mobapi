@@ -33,8 +33,33 @@ def get_users(game):
     return jsonify(user_query), 200
 
 
-def edit_user(id):
-    ...
+def edit_user(game, id):
+    session: Session = db.session
+
+    data = request.get_json()
+
+    query_game = session.query(Game)
+    query_user = session.query(User)
+
+    game_query = query_game.filter_by(url_name=game.lower()).first()
+
+    if not game_query:
+        return {"err": f"Game {game} not found"}, HTTPStatus.NOT_FOUND
+    
+    user_query = query_user.filter_by(id=id).first()
+
+    if user_query:
+        for key, value in data.items():
+        
+            setattr(user_query, key, value)
+        
+        session.commit()
+        
+        return jsonify(user_query), HTTPStatus.OK
+
+    else:
+        
+        return {'err': f"Id {id} doesn't exist"}, HTTPStatus.NOT_FOUND
 
 
 def delete_user(id):
