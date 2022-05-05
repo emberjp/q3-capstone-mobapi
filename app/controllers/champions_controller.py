@@ -75,7 +75,7 @@ def delete_champion(id):
     champion_query = query_champion.filter_by(id=id).first()
 
     if not champion_query:
-        return {"err": "Not Found"}, 404
+        return {"err": f"id {id} does not exist"}, 404
 
     session.delete(champion_query)
     session.commit()

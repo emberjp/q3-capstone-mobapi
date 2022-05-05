@@ -133,7 +133,12 @@ Bio is optional.
 **Content example**
 
 ```json
-adicionar exemplo aqui
+{
+	"bio": "your bio",
+	"email": "email",
+	"id": 1,
+	"name": "name"
+}
 
 ```
 
@@ -145,7 +150,9 @@ adicionar exemplo aqui
 
 **Content** :
 ```json
-adicionar exemplo aqui
+{
+	"err": "this email is already in use"
+}
 ```
 
 ## Or
@@ -281,5 +288,7 @@ adicionar exemplo aqui
 
 **Content** :
 ```json
-adicionar exemplo aqui
+{
+	"err": "id 2 does not exist"
+}
 ```
