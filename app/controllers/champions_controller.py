@@ -66,4 +66,15 @@ def edit_champion(game, id):
 
 
 def delete_champion(id):
-    ...
+    session: Session = db.session
+    query_champion: Query = session.query(Champion)
+
+    champion_query = query_champion.filter_by(id=id).first()
+
+    if not champion_query:
+        return {"err": "Not Found"}, 404
+
+    session.delete(champion_query)
+    session.commit()
+
+    return jsonify(None), 204

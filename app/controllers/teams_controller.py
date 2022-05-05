@@ -82,5 +82,15 @@ def edit_team(game, id):
     return jsonify(team_query), 200
 
 
-def delete_team(game,id):
-   ...
+def delete_team(id):
+    query_team: Query = db.session.query(Team)
+
+    team_query = query_team.filter_by(id=id).first()
+
+    if not team_query:
+        return {"err": "Not Found"}, 404
+
+    db.session.delete(team_query)
+    db.session.commit()
+
+    return jsonify(None), 204
