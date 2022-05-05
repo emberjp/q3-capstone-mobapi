@@ -17,6 +17,9 @@ def add_user(game):
         return jsonify(new_user), HTTPStatus.CREATED
     except exc.IntegrityError:
         return {"err": "this email is already in use"}, HTTPStatus.CONFLICT
+    
+    except exc.DataError:
+        return {"err": "name or email value is too large: name must be a maximum of 20 characters and email must be 50 characters"}, HTTPStatus.CONFLICT
 
 
 def get_users(game):
