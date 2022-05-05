@@ -20,7 +20,7 @@ class User(db.Model):
     name = Column(String(20), nullable=False)
     email = Column(String(50), nullable=False, unique=True)
     bio = Column(String)
-    password = Column(String, nullable=True)
+    password_hash = Column(String, nullable=True)
 
     positions = relationship(
         "Position", secondary="users_positions", back_populates="users"
@@ -39,7 +39,7 @@ class User(db.Model):
 
     @password.setter
     def password(self, value):
-        self.password = generate_password_hash(value)
+        self.password_hash = generate_password_hash(value)
 
     def check_password(self, password):
-        return check_password_hash(self.password, password)
+        return check_password_hash(self.password_hash, password)
