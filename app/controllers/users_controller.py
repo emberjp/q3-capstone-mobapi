@@ -89,7 +89,7 @@ def delete_user(game, id):
 
         return "", HTTPStatus.NO_CONTENT
     else:
-        return {'error': f" Id {id} doesn't exists"}, HTTPStatus.NOT_FOUND
+        return {'err': f" Id {id} doesn't exists"}, HTTPStatus.NOT_FOUND
 
 
 def login():
@@ -99,7 +99,6 @@ def login():
 
     found_user = query_user.filter_by(email=data["email"]).first()
     
-
     if not found_user:
         return {"msg": "user not found"}, HTTPStatus.NOT_FOUND
     

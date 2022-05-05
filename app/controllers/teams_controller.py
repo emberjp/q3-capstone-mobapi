@@ -18,8 +18,7 @@ def add_team(game):
         return jsonify(new_team), HTTPStatus.CREATED
     except AttributeError:
         return {
-            "error": 409,
-            "message": "There is already a team with this name",
+            "err": "There is already a team with this name",
         }, HTTPStatus.CONFLICT
 
 
