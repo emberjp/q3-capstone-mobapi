@@ -4,6 +4,8 @@ O objetivo do **MOBAPI** é fornecer uma plataforma para que jogadores de MOBAs 
 
 A API é extensível e pode ser utilizada para qualquer MOBA, bem como adaptada para atender a jogos de outros gêneros como First-Person Shooter Games.
 
+MOBAPI é acessada pelo site https://q3-capstone-mobapi.herokuapp.com/
+
 # Generic Error Messages
 
 **URL** : any endpoint
@@ -246,18 +248,6 @@ Bio is optional.
 	"bio": "your bio",
 	"password": "1234"
 }
-```
-
-## Or
-
-**Condition** : Fields are missed.
-
-**Code** : `400 BAD REQUEST`
-
-**Content** :
-
-```json
-adicionar exemplo aqui
 ```
 
 ## **Edit User**
