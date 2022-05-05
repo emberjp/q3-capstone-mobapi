@@ -60,7 +60,7 @@ def get_team(game, id):
 def data_to_edit(query, data):
     for key, value in data.items():
         setattr(query, key, value)
-    
+
     return query
 
 
@@ -88,7 +88,7 @@ def delete_team(id):
     team_query = query_team.filter_by(id=id).first()
 
     if not team_query:
-        return {"err": "Not Found"}, 404
+        return {"err": f" id {id} does not exist"}, 404
 
     db.session.delete(team_query)
     db.session.commit()
