@@ -328,7 +328,7 @@ Edit informations from an existing user, given its `id`.
 }
 ```
 
-## Error Responses
+## Error Response
 
 **Condition** : Fields have an invalid length
 
@@ -343,23 +343,13 @@ Edit informations from an existing user, given its `id`.
 }
 ```
 
-**Code** : ``
+**Code** : `409 CONFLICT`
 
 **Content** :
 ```json
-adicionar exemplo aqui
-```
-
-## Or
-
-**Condition** : Fields are missed.
-
-**Code** : `400 BAD REQUEST`
-
-**Content**
-
-```json
-adicionar exemplo aqui
+{
+	"err": "Name or email value is too large: name must be a maximum of 20 characters and email must be 50 characters"
+}
 ```
 
 ## **Delete User**
