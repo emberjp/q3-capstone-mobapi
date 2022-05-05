@@ -1,5 +1,5 @@
 from flask import Flask
-from migrate import Migrate
+from flask_migrate import Migrate
 
 
 def init_app(app: Flask):
