@@ -9,11 +9,14 @@ from app.models import Game, User
 
 
 def add_user(game):
-    user_data = request.get_json()
-    new_user = User(**user_data)
-    db.session.add(new_user)
-    db.session.commit()
-    return jsonify(new_user), HTTPStatus.CREATED
+    try:
+        user_data = request.get_json()
+        new_user = User(**user_data)
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify(new_user), HTTPStatus.CREATED
+    except exc.IntegrityError:
+        return {"err": "this email is already in use"}, HTTPStatus.CONFLICT
 
 
 def get_users(game):
@@ -45,21 +48,21 @@ def edit_user(game, id):
 
     if not game_query:
         return {"err": f"Game {game} not found"}, HTTPStatus.NOT_FOUND
-    
+
     user_query = query_user.filter_by(id=id).first()
 
     if user_query:
         for key, value in data.items():
-        
+
             setattr(user_query, key, value)
-        
+
         session.commit()
-        
+
         return jsonify(user_query), HTTPStatus.OK
 
     else:
-        
-        return {'err': f"Id {id} doesn't exist"}, HTTPStatus.NOT_FOUND
+
+        return {"err": f"Id {id} doesn't exist"}, HTTPStatus.NOT_FOUND
 
 
 def delete_user(game, id):
@@ -72,14 +75,14 @@ def delete_user(game, id):
 
     if not game_query:
         return {"err": f"Game {game} not found"}, HTTPStatus.NOT_FOUND
-    
+
     user_query = query_user.filter_by(id=id).first()
 
     if user_query:
         session.delete(user_query)
 
-        session.commit()    
+        session.commit()
 
         return "", HTTPStatus.NO_CONTENT
     else:
-        return {'error': f" Id {id} doesn't exists"}, HTTPStatus.NOT_FOUND
+        return {"error": f" Id {id} doesn't exists"}, HTTPStatus.NOT_FOUND

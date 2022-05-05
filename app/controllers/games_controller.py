@@ -1,9 +1,7 @@
 from flask import jsonify, request
 from app.configs.database import db
 from app.models import Game
-from sqlalchemy import exc
 from sqlalchemy.orm import Query
-from sqlalchemy.orm.session import Session
 from http import HTTPStatus
 
 

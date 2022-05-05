@@ -11,8 +11,12 @@ from http import HTTPStatus
 def add_champion(game):
     champion_data = request.get_json()
     new_champion = Champion(**champion_data)
-    champion_game = db.session.query(Game).filter_by(url_name=game.lower()).first()
-    new_champion.game = champion_game
+    game = db.session.query(Game).filter_by(url_name=game.lower()).first()
+
+    if not game:
+        return {"err": f"Game {game} not found"}, HTTPStatus.NOT_FOUND
+
+    new_champion.game = game
     db.session.add(new_champion)
     db.session.commit()
     return jsonify(new_champion), HTTPStatus.CREATED
@@ -47,22 +51,21 @@ def edit_champion(game, id):
 
     if not game_query:
         return {"err": f"Game {game} not found"}, HTTPStatus.NOT_FOUND
-    
+
     champion_query = query_champion.filter_by(id=id).first()
 
     if champion_query:
         for key, value in data.items():
-        
+
             setattr(champion_query, key, value)
-        
+
         session.commit()
-        
+
         return jsonify(champion_query), HTTPStatus.OK
 
     else:
-        
-        return {'err': f"{id} doesn't exist"}, HTTPStatus.NOT_FOUND
-    
+
+        return {"err": f"{id} doesn't exist"}, HTTPStatus.NOT_FOUND
 
 
 def delete_champion(id):
