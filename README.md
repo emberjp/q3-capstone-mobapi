@@ -44,6 +44,62 @@ A API é extensível e pode ser utilizada para qualquer MOBA, bem como adaptada 
 
 ```
 
+# Login
+
+Used to collect a token for a registered user.
+
+**URL** : `/login/`
+
+**Method** : `POST`
+
+**Auth required** : No
+
+**Data constraints**
+
+```json
+{
+    "email": "[valid email address]",
+    "password": "[password]"
+}
+```
+
+**Data example**
+
+```json
+{
+    "email": "iloveauth@example.com",
+    "password": "abcd1234"
+}
+```
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+```json
+{
+    "token": "93144b288eb1fdccbe46d6fc0f241a51766ecd3d"
+}
+```
+
+## Error Response
+
+**Condition** : If 'username' and 'password' combination is wrong.
+
+**Code** : `400 BAD REQUEST`
+
+**Content** :
+
+```json
+{
+    "non_field_errors": [
+        "Unable to login with provided credentials."
+    ]
+}
+```
+
 # Users Route
 
 ## **List Users**
