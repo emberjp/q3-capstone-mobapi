@@ -4,6 +4,7 @@ from sqlalchemy import exc
 from sqlalchemy.orm import Query
 from sqlalchemy.orm.session import Session
 from http import HTTPStatus
+from flask_jwt_extended import create_access_token
 
 from app.models import Game, User
 
@@ -21,7 +22,7 @@ def add_user(game):
     except exc.DataError:
         return {"err": "Name or email value is too large: name must be a maximum of 20 characters and email must be 50 characters"}, HTTPStatus.CONFLICT
 
-
+@jwt_required()
 def get_users(game):
     query_user: Query = db.session.query(User)
     query_game: Query = db.session.query(Game)
@@ -38,7 +39,7 @@ def get_users(game):
 
     return jsonify(user_query), 200
 
-
+@jwt_required()
 def edit_user(game, id):
     session: Session = db.session
 
@@ -67,7 +68,7 @@ def edit_user(game, id):
 
         return {"err": f"Id {id} doesn't exist"}, HTTPStatus.NOT_FOUND
 
-
+@jwt_required()
 def delete_user(game, id):
     session: Session = db.session()
 
@@ -88,4 +89,24 @@ def delete_user(game, id):
 
         return "", HTTPStatus.NO_CONTENT
     else:
-        return {"error": f" Id {id} doesn't exists"}, HTTPStatus.NOT_FOUND
+        return {'error': f" Id {id} doesn't exists"}, HTTPStatus.NOT_FOUND
+
+
+def login():
+    data = request.get_json()
+
+    query_user = db.session.query(User)
+
+    found_user = query_user.filter_by(email=data["email"]).first()
+    
+
+    if not found_user:
+        return {"msg": "user not found"}, HTTPStatus.NOT_FOUND
+    
+    if found_user.verify_password(data["password"]):
+        token = create_access_token(identity=found_user)
+        return {"access_token": token}, HTTPStatus.OK
+
+    else:
+        return {"msg": "unauthorized"}, HTTPStatus.UNAUTHORIZED
+
