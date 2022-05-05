@@ -44,7 +44,9 @@ A API é extensível e pode ser utilizada para qualquer MOBA, bem como adaptada 
 
 ```
 
-# Login
+# Users Route
+
+## **Login**
 
 Used to collect a token for a registered user.
 
@@ -67,8 +69,8 @@ Used to collect a token for a registered user.
 
 ```json
 {
-    "email": "iloveauth@example.com",
-    "password": "abcd1234"
+    "email": "john@email.com",
+    "password": "doe1234"
 }
 ```
 
@@ -80,7 +82,7 @@ Used to collect a token for a registered user.
 
 ```json
 {
-    "token": "93144b288eb1fdccbe46d6fc0f241a51766ecd3d"
+	"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1MTc4ODYwMSwianRpIjoiYmZmNzEwNzYtOTI1MC00NzYzLWE0MTAtNDdhMDZjNWJkYzc2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MTAsIm5hbWUiOiJuYW1lcyIsImVtYWlsIjoiZW1haWwyIiwiYmlvIjoieW91ciBiaW8iLCJnYW1lIjpbXSwicG9zaXRpb25zIjpbXSwiY2hhbXBpb25zIjpbXSwidGVhbXMiOltdfSwibmJmIjoxNjUxNzg4NjAxLCJleHAiOjE2NTE3ODk1MDF9.Fbd8a6YsiuH77-Gge52Hit-vuNcalv1MnoihqI8NbhQ"
 }
 ```
 
@@ -94,13 +96,9 @@ Used to collect a token for a registered user.
 
 ```json
 {
-    "non_field_errors": [
-        "Unable to login with provided credentials."
-    ]
+	"msg": "Missing Authorization Header"
 }
 ```
-
-# Users Route
 
 ## **List Users**
 
@@ -110,7 +108,7 @@ Show all user accounts registered on `game`.
 
 **Method** : `GET`
 
-**Auth required** : NO
+**Auth required** : Yes
 
 **Permissions required** : None
 
@@ -127,7 +125,28 @@ Show all user accounts registered on `game`.
 **Content** :
 
 ```json
-adicionar exemplo aqui
+[
+	{
+		"bio": "your bio",
+		"champions": [],
+		"email": "email",
+		"game": [],
+		"id": 1,
+		"name": "name",
+		"positions": [],
+		"teams": []
+	},
+	{
+		"bio": "your bio",
+		"champions": [],
+		"email": "email2",
+		"game": [],
+		"id": 10,
+		"name": "names",
+		"positions": [],
+		"teams": []
+	}
+]
 ```
 
 ## Error Response
@@ -151,7 +170,7 @@ Create an user account on `game` if an username does not already exist.
 
 **Method** : `POST`
 
-**Auth required** : NO
+**Auth required** : No
 
 **Permissions required** : None
 
@@ -186,7 +205,7 @@ Bio is optional.
 
 **Code** : `201 CREATED`
 
-**Content example**
+**Content example** :
 
 ```json
 {
@@ -202,9 +221,10 @@ Bio is optional.
 
 **Condition** : Email already exists.
 
-**Code** : 
+**Code** : `409 CONFLICT`
 
 **Content** :
+
 ```json
 {
 	"err": "this email is already in use"
@@ -217,10 +237,15 @@ Bio is optional.
 
 **Code** : `400 BAD REQUEST`
 
-**Content**
+**Content** :
 
 ```json
-adicionar exemplo aqui
+{
+	"name": "This_is_definitely_a_very_big_name",
+	"email": "email3",
+	"bio": "your bio",
+	"password": "1234"
+}
 ```
 
 ## Or
@@ -229,7 +254,7 @@ adicionar exemplo aqui
 
 **Code** : `400 BAD REQUEST`
 
-**Content**
+**Content** :
 
 ```json
 adicionar exemplo aqui
@@ -243,7 +268,7 @@ Edit informations from an existing user, given its `id`.
 
 **Method** : `POST`
 
-**Auth required** : YES
+**Auth required** : Yes
 
 **Permissions required** : None
 
@@ -275,20 +300,50 @@ Edit informations from an existing user, given its `id`.
 
 **Condition** : Everything is OK.
 
-**Code** : `201 CREATED`
-
-**Content example**
+**Data example** :
 
 ```json
-adicionar exemplo aqui
+{
+	"name": "Test",
+	"email": "email",
+	"bio": "your bio",
+	"password": "1234"
+}
+```
 
+**Code** : `201 CREATED`
+
+**Content example** :
+
+```json
+{
+	"bio": "your bio",
+	"champions": [],
+	"email": "email",
+	"game": [],
+	"id": 1,
+	"name": "Test",
+	"positions": [],
+	"teams": []
+}
 ```
 
 ## Error Responses
 
 **Condition** : Fields have an invalid length
 
-**Code** : 
+**Data example** :
+
+```json
+{
+	"name": "This_is_a_really_big_name",
+	"email": "email",
+	"bio": "your bio",
+	"password": "1234"
+}
+```
+
+**Code** : ``
 
 **Content** :
 ```json
@@ -315,7 +370,7 @@ Delete an existing user, given its `id`.
 
 **Method** : `DELETE`
 
-**Auth required** : YES
+**Auth required** : Yes
 
 **Permissions required** : None
 
@@ -327,12 +382,11 @@ Delete an existing user, given its `id`.
 
 **Condition** : If everything is OK and `id` exists.
 
-**Code** :
+**Code** : `204 NO CONTENT`
 
 **Content example**
 
 ```json
-adicionar exemplo aqui
 
 ```
 
