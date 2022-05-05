@@ -85,4 +85,4 @@ def delete_user(game, id):
 
         return "", HTTPStatus.NO_CONTENT
     else:
-        return {"error": f" Id {id} doesn't exists"}, HTTPStatus.NOT_FOUND
+        return {"err": f"id {id} does not exist"}, HTTPStatus.NOT_FOUND
