@@ -59,12 +59,15 @@ def edit_user(game, id):
 
     user_query = query_user.filter_by(id=id).first()
 
-    if user_query:
-        for key, value in data.items():
-
-            setattr(user_query, key, value)
-
+    try:
+        if user_query:
+            for key, value in data.items():
+                setattr(user_query, key, value)
         session.commit()
+    except exc.DataError :
+        return {
+            "err": "Name or email value is too large: name must be a maximum of 20 characters and email must be 50 characters"
+        }, HTTPStatus.CONFLICT
 
         return jsonify(user_query), HTTPStatus.OK
 

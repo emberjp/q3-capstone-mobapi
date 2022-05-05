@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from turtle import pos
 
 from app.configs.database import db
 from app.models import TeamUser, UserGame
