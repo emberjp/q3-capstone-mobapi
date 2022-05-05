@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from turtle import pos
 
 from app.configs.database import db
 from app.models import TeamUser, UserGame
@@ -13,6 +14,10 @@ class User(db.Model):
     name: str
     email: str
     bio: str
+    game: list
+    positions: list
+    champions: list
+    teams: list
 
     __tablename__ = "users"
 
