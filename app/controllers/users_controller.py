@@ -63,17 +63,14 @@ def edit_user(game, id):
         if user_query:
             for key, value in data.items():
                 setattr(user_query, key, value)
-        session.commit()
-    except exc.DataError :
+            session.commit()
+            return jsonify(user_query), HTTPStatus.OK
+        else:
+            return {"err": f"Id {id} does not exist"}, HTTPStatus.NOT_FOUND
+    except exc.DataError:
         return {
             "err": "Name or email value is too large: name must be a maximum of 20 characters and email must be 50 characters"
         }, HTTPStatus.CONFLICT
-
-        return jsonify(user_query), HTTPStatus.OK
-
-    else:
-
-        return {"err": f"Id {id} doesn't exist"}, HTTPStatus.NOT_FOUND
 
 
 @jwt_required()
