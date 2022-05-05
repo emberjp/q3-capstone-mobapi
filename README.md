@@ -4,7 +4,7 @@ O objetivo do **MOBAPI** é fornecer uma plataforma para que jogadores de MOBAs 
 
 A API é extensível e pode ser utilizada para qualquer MOBA, bem como adaptada para atender a jogos de outros gêneros como First-Person Shooter Games.
 
-MOBAPI é acessada pelo site https://q3-capstone-mobapi.herokuapp.com/
+**MOBAPI** é acessada pelo site https://q3-capstone-mobapi.herokuapp.com/
 
 # Generic Error Messages
 
