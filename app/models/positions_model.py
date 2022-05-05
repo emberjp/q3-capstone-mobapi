@@ -10,6 +10,7 @@ from sqlalchemy.orm import relationship
 class Position(db.Model):
     id: int
     name: str
+    users: list
 
     __tablename__ = "positions"
 
@@ -22,5 +23,3 @@ class Position(db.Model):
         "User", secondary="users_positions", back_populates="positions"
     )
     game = relationship("Game", back_populates="positions", uselist=False)
-
- 
