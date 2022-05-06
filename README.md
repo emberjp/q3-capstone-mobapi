@@ -26,7 +26,6 @@ A API é extensível e pode ser utilizada para qualquer MOBA, bem como adaptada 
 {
 	"err": "Route not found"
 }
-
 ```
 
 ## Or
@@ -43,7 +42,6 @@ A API é extensível e pode ser utilizada para qualquer MOBA, bem como adaptada 
 {
 	"err": "Game dota not found"
 }
-
 ```
 
 # Users Route
@@ -380,5 +378,235 @@ Delete an existing user, given its `id`.
 ```json
 {
 	"err": "id 2 does not exist"
+}
+```
+# Champions Route
+
+## **List Champions**
+
+Show all champions registered on `game`.
+
+**URL** : `/:game/champions`
+
+**Method** : `GET`
+
+**Auth required** : No
+
+**Permissions required** : None
+
+**Data constraints** : `{}`
+
+## Success Response
+
+**Condition** : User can see one or more champions.
+
+**Request example** : `/lol/champions`
+
+**Code** : `200 OK`
+
+**Content** :
+
+```json
+[
+	{
+		"id": 1,
+		"img_url": "placeholder",
+		"info": "placeholder",
+		"name": "Ahri",
+		"roles": [
+			{
+				"id": 3,
+				"name": "mage"
+			}
+		]
+	}
+]
+```
+
+## Error Response
+
+**Condition** : no champions registered.
+
+**Code** : `404 NOT FOUND`
+
+**Content** :
+```json
+{
+	"err": "Nothing to list"
+}
+```
+
+## **Create Champion**
+
+Create a champion on `game` if a champion does not already exist.
+
+**URL** : `/:game/champions/`
+
+**Method** : `POST`
+
+**Auth required** : No
+
+**Permissions required** : None
+
+**Data constraints** : Provide name, picture, info and game to create a champion.
+
+```json
+{
+	"name": "[16 chars max]",
+	"img_url": "[text]",
+	"info": "[text]",
+	"game": "[text]"
+}
+```
+
+**Request example** : `/lol/champions`
+
+**Data example** :
+
+```json
+{
+	"name": "name1",
+	"img_url": "img1",
+	"info": "link1",
+	"game": "game1"
+}
+```
+
+## Success Response
+
+**Condition** : Everything is OK.
+
+**Code** : `201 CREATED`
+
+**Content example** :
+
+```json
+{
+    "id": 1,
+	"name": "name1",
+	"img_url": "img1",
+	"info": "link1",
+	"game": "game1"
+}
+```
+
+## **Edit Champion**
+
+Edit informations from an existing champion, given its `id`.
+
+**URL** : `/:game/champions/:id`
+
+**Method** : `POST`
+
+**Auth required** : No
+
+**Permissions required** : None
+
+**Data constraints** : Provide name, picture, info and game to edit a champion.
+
+```json
+{
+	"name": "name1",
+	"img_url": "img1",
+	"info": "link1",
+	"game": "game1"
+}
+```
+
+**Request example** : `/lol/champions`
+
+**Data example** :
+
+```json
+{
+	"info": "test"
+}
+```
+
+## Success Response
+
+**Condition** : Everything is OK.
+
+**Data example** :
+
+```json
+{
+	"name": "Test",
+	"email": "email",
+	"bio": "your bio",
+	"password": "1234"
+}
+```
+
+**Code** : `200 OK`
+
+**Content example** :
+
+```json
+{
+	"id": 1,
+	"img_url": "placeholder",
+	"info": "test",
+	"name": "Ahri",
+	"roles": [
+		{
+			"id": 3,
+			"name": "mage"
+		}
+	]
+}
+```
+
+## Error Response
+
+**Condition** : `id` does not exit
+
+**Code** : `404 NOT FOUND`
+
+**Content** :
+```json
+{
+	"err": "20 doesn't exist"
+}
+```
+
+## **Delete Champion**
+
+Delete an existing champion, given its `id`.
+
+**URL** : `/:game/champions/:id`
+
+**Method** : `DELETE`
+
+**Auth required** : No
+
+**Permissions required** : None
+
+**Data constraints** : `{}`
+
+**Request example** : `/lol/champions/1`
+
+## Success Response
+
+**Condition** : If everything is OK and `id` exists.
+
+**Code** : `204 NO CONTENT`
+
+**Content example**
+
+```json
+
+```
+
+## Error Response
+
+**Condition** : `id` does not exist
+
+**Code** : `404 NOT FOUND`
+
+**Content** :
+```json
+{
+	"err": "id 20 does not exist"
 }
 ```
