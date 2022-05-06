@@ -84,7 +84,7 @@ Used to collect a token for a registered user.
 
 ```json
 {
-	"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1MTc4ODYwMSwianRpIjoiYmZmNzEwNzYtOTI1MC00NzYzLWE0MTAtNDdhMDZjNWJkYzc2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MTAsIm5hbWUiOiJuYW1lcyIsImVtYWlsIjoiZW1haWwyIiwiYmlvIjoieW91ciBiaW8iLCJnYW1lIjpbXSwicG9zaXRpb25zIjpbXSwiY2hhbXBpb25zIjpbXSwidGVhbXMiOltdfSwibmJmIjoxNjUxNzg4NjAxLCJleHAiOjE2NTE3ODk1MDF9.Fbd8a6YsiuH77-Gge52Hit-vuNcalv1MnoihqI8NbhQ"
+	"access_token": "[token]"
 }
 ```
 
