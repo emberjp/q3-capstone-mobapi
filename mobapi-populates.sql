@@ -11,7 +11,8 @@ VALUES
     ('mage'),
     ('marksman'),
     ('support'),
-    ('tank');
+    ('tank'),
+    ('feeder');
 
 INSERT INTO
     champions (name,img_url,info,game_id)
@@ -39,3 +40,11 @@ VALUES
     ('jungle',(SELECT id FROM games WHERE url_name = 'lol')),
     ('support',(SELECT id FROM games WHERE url_name = 'lol')),
     ('bot',(SELECT id FROM games WHERE url_name = 'lol'));
+
+INSERT INTO
+    teams (name,game_id)
+VALUES
+    ('Alpha',(SELECT id FROM games WHERE url_name = 'lol')),
+    ('Beta',(SELECT id FROM games WHERE url_name = 'lol')),
+    ('Delta',(SELECT id FROM games WHERE url_name = 'lol')),
+    ('Gama',(SELECT id FROM games WHERE url_name = 'lol'));
