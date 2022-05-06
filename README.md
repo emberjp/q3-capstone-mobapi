@@ -102,9 +102,9 @@ Used to collect a token for a registered user.
 
 ## **List Users**
 
-Show all user accounts registered on `game`.
+Show all user accounts registered on `game` and filtered by `position`
 
-**URL** : `/:game/users`
+**URL** : `/:game/users?position=[position]`
 
 **Method** : `GET`
 
