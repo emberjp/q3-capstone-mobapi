@@ -10,7 +10,6 @@ from sqlalchemy.orm import relationship
 class Position(db.Model):
     id: int
     name: str
-    users: list
 
     __tablename__ = "positions"
 
