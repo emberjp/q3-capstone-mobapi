@@ -22,5 +22,3 @@ class Position(db.Model):
         "User", secondary="users_positions", back_populates="positions"
     )
     game = relationship("Game", back_populates="positions", uselist=False)
-
- 

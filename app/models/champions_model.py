@@ -11,6 +11,7 @@ class Champion(db.Model):
     name: str
     img_url: str
     info: str
+    roles: list
 
     __tablename__ = "champions"
 
