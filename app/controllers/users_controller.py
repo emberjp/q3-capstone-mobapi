@@ -35,7 +35,13 @@ def get_users(game):
     if not game_query:
         return {"err": f"Game {game} not found"}, 404
 
+    query_params = request.args
+    position = query_params.get("position")
+
     user_query = query_user.order_by(User.id).all()
+
+    if position:
+        user_query = [user for user in user_query if position in user.positions]
 
     if not user_query:
         return {"err": "Nothing to list"}, 404
